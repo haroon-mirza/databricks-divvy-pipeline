@@ -22,6 +22,7 @@ jobs:
           pip install dbt-core dbt-databricks
 
       - name: Configure dbt profiles.yml
+        # We still create this file for local runs, but the environment variables will take precedence in CI/CD
         run: |
           mkdir -p ~/.dbt
           echo "
@@ -39,11 +40,20 @@ jobs:
           " > ~/.dbt/profiles.yml
 
       - name: Run dbt Models
+        # --- THIS IS THE FIX ---
+        # We are explicitly setting the environment variables that dbt will use for authentication.
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
           cd dbt_project
           dbt run
 
       - name: Test dbt Models
+        # We set the environment variables here as well.
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
           cd dbt_project
           dbt test
