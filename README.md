@@ -2,7 +2,8 @@
 
 This project delivers a robust, end-to-end data engineering solution for ingesting and transforming complex bike-share data. It leverages a modern, hybrid approach on Databricks, handling inconsistent raw data, enforcing data quality, and structuring it for analytics.
 
-![Architecture Diagram]
+<img width="1146" height="660" alt="data architecture" src="https://github.com/user-attachments/assets/4fe7f493-31db-42a9-9931-c0bdb9373514" />
+
 *Architecture: Raw Files -> DLT & PySpark (Bronze) -> dbt & SQL (Silver, Gold) -> Power BI*
 
 ---
@@ -18,7 +19,7 @@ This project delivers a robust, end-to-end data engineering solution for ingesti
 * **Code Quality:** Pytest (for Python transformation logic)
 * **CI/CD:** GitHub Actions (configured, awaiting full platform support)
 * **Analytics:** Power BI
-* **Version Control:** Git & GitHub
+* **Version Control:** Git & GitHub 
 
 ---
 
