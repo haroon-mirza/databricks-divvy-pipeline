@@ -1,0 +1,8 @@
+
+version: 2
+sources:
+  - name: divvy_source
+    database: dev_catalog
+    schema: divvy_analytics
+    tables:
+      - name: divvy_trips_bronze

@@ -1,0 +1,14 @@
+
+version: 2
+models:
+  - name: divvy_trips_silver
+    columns:
+      - name: trip_id
+        tests:
+          - unique
+          - not_null
+  - name: trips_by_usertype_gold
+    columns:
+      - name: total_trips
+        tests:
+          - not_null
