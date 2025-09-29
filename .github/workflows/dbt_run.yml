@@ -1,0 +1,49 @@
+name: Run dbt Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_and_test_dbt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dbt and Databricks adapter
+        run: |
+          pip install dbt-core dbt-databricks
+
+      - name: Configure dbt profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          echo "
+          dbt_project:
+            outputs:
+              dev:
+                type: databricks
+                host: ${{ secrets.DATABRICKS_HOST }}
+                http_path: ${{ secrets.DBT_HTTP_PATH }}
+                token: ${{ secrets.DATABRICKS_TOKEN }}
+                catalog: dev_catalog
+                schema: divvy_analytics
+                threads: 4
+            target: dev
+          " > ~/.dbt/profiles.yml
+
+      - name: Run dbt Models
+        run: |
+          cd dbt_project
+          dbt run
+
+      - name: Test dbt Models
+        run: |
+          cd dbt_project
+          dbt test
