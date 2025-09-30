@@ -1,4 +1,4 @@
-# Databricks DLT & dbt Hybrid Data Pipeline
+# Databricks Lakehouse Customer Activity ETL Pipeline
 
 This project delivers a robust, end-to-end data engineering solution for ingesting and transforming complex bike-share data. It leverages a modern, hybrid approach on Databricks, handling inconsistent raw data, enforcing data quality, and structuring it for analytics.
 
